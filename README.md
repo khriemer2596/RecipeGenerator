@@ -1,4 +1,4 @@
-#Recipe Generator
+**Recipe Generator**
 This app is currently in development.
 
 Struggling to decide on what to have for dinners is a universal truth in this day and age.
