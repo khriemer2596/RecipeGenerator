@@ -1,4 +1,4 @@
-<h1>**Recipe Generator**</h1>
+<h1*Recipe Generator</h1>
 
 This app is currently in development.
 
