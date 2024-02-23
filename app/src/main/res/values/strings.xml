@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">RecipeGen</string>
+    <string name="recipe_screen">Chosen Recipes</string>
+    <string name="ingredient_screen">Ingredients List</string>
+    <string name="back_button">Back</string>
+    <string name="home_text_1">What Are You Eating This Week?</string>
+    <string name="home_text_2">"Select Number of Meals:"</string>
+    <string name="one_meal">One Meal</string>
+    <string name="two_meals">Two Meals</string>
+    <string name="three_meals">Three Meals</string>
+    <string name="four_meals">Four Meals</string>
+    <string name="five_meals">Five Meals</string>
+    <string name="six_meals">Six Meals</string>
+    <string name="seven_meals">Seven Meals</string>
+</resources>
