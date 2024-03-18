@@ -147,7 +147,7 @@ fun RecipeGenApp(
                 )
             }
             composable(route = RecipeGenScreen.Ingredients.name) {
-                IngredientScreen( // TODO: Implement Ingredient Screen; diplay with LazyColumn
+                IngredientScreen( // TODO: Implement Ingredient Screen; display with LazyColumn
                     onEmailIngredientListButtonClicked = { emailIngredientList() },
                     onStartNewButtonClicked = {
                         viewModel.setQuantity(it)
