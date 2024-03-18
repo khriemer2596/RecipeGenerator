@@ -21,7 +21,47 @@ class RecipeGenViewModel : ViewModel() {
     fun setQuantity(numberRecipes: Int) {
         _uiState.update { currentState ->
             currentState.copy(
-                recipeQuantity = numberRecipes.toInt()
+                recipeQuantity = numberRecipes
+            )
+        }
+    }
+
+    fun setRecipesGenerated() {
+        _uiState.update { currentState ->
+            currentState.copy(
+                recipesGenerated = true
+            )
+        }
+    }
+
+    fun resetRecipesGenerated() {
+        _uiState.update { currentState ->
+            currentState.copy(
+                recipesGenerated = false
+            )
+        }
+    }
+
+    fun setRecipesAccepted() {
+        _uiState.update { currentState ->
+            currentState.copy(
+                recipesAccepted = true
+            )
+        }
+    }
+
+    fun resetRecipesAccepted() {
+        _uiState.update { currentState ->
+            currentState.copy(
+                recipesAccepted = false
+            )
+        }
+    }
+
+    fun updateRecipeList(newList: List<Int>) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                recipeList = newList
             )
         }
     }

@@ -1,6 +1,5 @@
 package com.example.recipegen
 
-import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -26,25 +25,43 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.recipegen.ui.IngredientScreen
 import com.example.recipegen.ui.RecipeScreen
 import androidx.compose.material3.Icon
-import androidx.navigation.compose.ComposeNavigator
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.recipegen.data.DataSource
+import com.example.recipegen.data.RecipeUiState
+import kotlin.random.Random
 
-enum class RecipeGenScreen(@StringRes val title: Int) {
-    Home(title = R.string.app_name),
-    Recipes(title = R.string.recipe_screen),
-    Ingredients(title = R.string.ingredient_screen)
+enum class RecipeGenScreen(var title: String) {
+    Home(title = R.string.app_name.toString()),
+    Recipes(title = R.string.recipe_screen.toString()),
+    Ingredients(title = R.string.ingredient_screen.toString())
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RecipeGenAppBar(
+    uiState: RecipeUiState,
     currentScreen: RecipeGenScreen,
     canNavigateBack: Boolean,
     navigateUp: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    if (uiState.recipesGenerated) {
+        if (uiState.recipesAccepted) {
+            currentScreen.title = stringResource(R.string.ingredient_screen)
+        }
+        else {
+            currentScreen.title = stringResource(R.string.recipe_screen)
+        }
+    }
+    else {
+        currentScreen.title = stringResource(id = R.string.app_name)
+    }
     TopAppBar(
-        title = { Text(stringResource(currentScreen.title)) },
+        title = { Text(currentScreen.title) },
         modifier = modifier,
         navigationIcon = {
             if (canNavigateBack) {
@@ -65,17 +82,33 @@ fun RecipeGenApp(
     viewModel: RecipeGenViewModel = viewModel(),
     navController: NavHostController = rememberNavController()
 ) {
-    val currentScreen = RecipeGenScreen.valueOf(RecipeGenScreen.Home.name)
+    val backStackEntry by navController.currentBackStackEntryAsState()
+    val currentScreen = RecipeGenScreen.valueOf(
+        backStackEntry?.destination?.route ?: RecipeGenScreen.Home.name
+    )
+    val uiState by viewModel.uiState.collectAsState()
+    val generatedRecipeList by remember { mutableStateOf(listOf<Int>()) } // May not need
+
     Scaffold(
         topBar = {
             RecipeGenAppBar(
+                uiState = uiState,
                 currentScreen = currentScreen,
-                canNavigateBack = navController.previousBackStackEntry != null,
-                navigateUp = { navController.navigateUp() }
+                canNavigateBack = navController.previousBackStackEntry != null &&
+                        currentScreen.title != stringResource(id = R.string.app_name),
+                navigateUp = {
+                    if (uiState.recipesAccepted) {
+                        viewModel.resetRecipesAccepted()
+                        navController.navigateUp()
+                    }
+                    else if (uiState.recipesGenerated) {
+                        viewModel.resetRecipesGenerated()
+                        navController.navigateUp()
+                    }
+                }
             )
         }
     ) { innerPadding ->
-        val uiState by viewModel.uiState.collectAsState()
 
         NavHost(
             navController = navController,
@@ -87,6 +120,8 @@ fun RecipeGenApp(
                     recipeQuantities = DataSource.recipeQuantities,
                     onSubmitButtonClicked = {
                         viewModel.setQuantity(it)
+                        viewModel.updateRecipeList(generateRecipe(it))
+                        viewModel.setRecipesGenerated()
                         navController.navigate(RecipeGenScreen.Recipes.name)
                     },
                     modifier = Modifier
@@ -96,18 +131,23 @@ fun RecipeGenApp(
             }
             composable(route = RecipeGenScreen.Recipes.name) {
                 RecipeScreen(
+                    recipeList = uiState.recipeList,
                     onSeeIngredientsButtonClicked = {
-                        viewModel.setQuantity(it)
+                        viewModel.setRecipesAccepted()
                         navController.navigate(RecipeGenScreen.Ingredients.name)
                     },
                     onCancelButtonClicked = { cancelRecipeGeneration(viewModel, navController) },
+                    onRegenerateButtonClicked = {
+                        viewModel.updateRecipeList(generateRecipe(uiState.recipeQuantity))
+                        viewModel.setRecipesGenerated()
+                    },
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(8.dp)
                 )
             }
             composable(route = RecipeGenScreen.Ingredients.name) {
-                IngredientScreen(
+                IngredientScreen( // TODO: Implement Ingredient Screen; diplay with LazyColumn
                     onEmailIngredientListButtonClicked = { emailIngredientList() },
                     onStartNewButtonClicked = {
                         viewModel.setQuantity(it)
@@ -129,6 +169,15 @@ private fun cancelRecipeGeneration(
 ) {
     viewModel.resetRecipeGenProcess()
     navController.popBackStack(RecipeGenScreen.Home.name, inclusive = false)
+}
+
+private fun generateRecipe(it: Int): ArrayList<Int> {
+    val listOfNums = arrayListOf<Int>()
+    for (i in 1..it) {
+        val recipe = Random.nextInt(0, 10)
+        listOfNums.add(recipe)
+    }
+    return listOfNums
 }
 
 private fun emailIngredientList() {

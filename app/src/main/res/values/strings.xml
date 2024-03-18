@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">RecipeGen</string>
-    <string name="recipe_screen">Chosen Recipes</string>
+    <string name="recipe_screen">Generated Recipes</string>
     <string name="ingredient_screen">Ingredients List</string>
     <string name="back_button">Back</string>
     <string name="home_text_1">What Are You Eating This Week?</string>
@@ -12,4 +12,7 @@
     <string name="five_meals">Five Meals</string>
     <string name="six_meals">Six Meals</string>
     <string name="seven_meals">Seven Meals</string>
+    <string name="regenerate_recipes">Regenerate Recipes</string>
+    <string name="see_ingredients">See Ingredients</string>
+    <string name="cancel">Cancel</string>
 </resources>

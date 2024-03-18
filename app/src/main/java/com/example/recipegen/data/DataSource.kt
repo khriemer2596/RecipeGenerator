@@ -13,4 +13,6 @@ object DataSource {
         Pair(R.string.six_meals, 6),
         Pair(R.string.seven_meals, 7)
     )
+
+    // TODO: Add actual recipes
 }

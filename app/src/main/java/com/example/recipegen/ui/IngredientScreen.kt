@@ -27,7 +27,7 @@ fun IngredientScreen(
             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
         ) {
             Text(
-                text = "Recipes"
+                text = "Ingredients"
             )
         }
     }
