@@ -172,6 +172,8 @@ private fun cancelRecipeGeneration(
 }
 
 private fun generateRecipe(it: Int): ArrayList<Int> {
+    // TODO: Write backend logic for recipe generation
+    // Partition recipe types and avoid repeats
     val listOfNums = arrayListOf<Int>()
     for (i in 1..it) {
         val recipe = Random.nextInt(0, 10)
