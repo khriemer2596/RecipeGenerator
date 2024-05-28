@@ -54,6 +54,7 @@ fun IngredientScreen(
                 IngredientRow(ingredients[ingredient])
             }
         }
+        //TODO: Add other buttons
     }
 }
 
