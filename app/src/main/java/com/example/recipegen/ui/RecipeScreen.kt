@@ -14,6 +14,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.material3.Button
 import com.example.recipegen.R
+import com.example.recipegen.data.DataSource
 
 @Composable
 fun RecipeScreen(
@@ -38,7 +39,7 @@ fun RecipeScreen(
             //Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
             for (recipe in recipeList) {
                 Text(
-                    text = "Recipe $recipe" // Revise this to DataSource.recipes[recipe] eventually
+                    text = DataSource.recipeNames[recipe]
                 )
             }
             SeeIngredientsButton(

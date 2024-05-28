@@ -66,6 +66,14 @@ class RecipeGenViewModel : ViewModel() {
         }
     }
 
+    fun updateIngredientList(newList: List<Int>) {
+        _uiState.update { currentState ->
+            currentState.copy(
+                ingredientList = newList
+            )
+        }
+    }
+
     fun resetRecipeGenProcess() {
         _uiState.value = RecipeUiState()
     }

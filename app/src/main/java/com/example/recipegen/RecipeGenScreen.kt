@@ -134,6 +134,7 @@ fun RecipeGenApp(
                     recipeList = uiState.recipeList,
                     onSeeIngredientsButtonClicked = {
                         viewModel.setRecipesAccepted()
+                        viewModel.updateIngredientList(uiState.recipeList)
                         navController.navigate(RecipeGenScreen.Ingredients.name)
                     },
                     onCancelButtonClicked = { cancelRecipeGeneration(viewModel, navController) },
@@ -148,6 +149,7 @@ fun RecipeGenApp(
             }
             composable(route = RecipeGenScreen.Ingredients.name) {
                 IngredientScreen( // TODO: Implement Ingredient Screen; display with LazyColumn
+                    ingredientList = uiState.ingredientList,
                     onEmailIngredientListButtonClicked = { emailIngredientList() },
                     onStartNewButtonClicked = {
                         viewModel.setQuantity(it)
@@ -172,11 +174,13 @@ private fun cancelRecipeGeneration(
 }
 
 private fun generateRecipe(it: Int): ArrayList<Int> {
-    // TODO: Write backend logic for recipe generation
-    // Partition recipe types and avoid repeats
     val listOfNums = arrayListOf<Int>()
+    val totalRecipes = DataSource.recipeNames.size
     for (i in 1..it) {
-        val recipe = Random.nextInt(0, 10)
+        var recipe = Random.nextInt(0, totalRecipes - 1)
+        while (listOfNums.contains(recipe)) {
+            recipe = Random.nextInt(0, totalRecipes - 1)
+        }
         listOfNums.add(recipe)
     }
     return listOfNums
