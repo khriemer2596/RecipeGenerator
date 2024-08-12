@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RecipeGen</string>
+    <string name="app_name">Recipe Gen</string>
     <string name="recipe_screen">Generated Recipes</string>
     <string name="ingredient_screen">Ingredients List</string>
     <string name="back_button">Back</string>
