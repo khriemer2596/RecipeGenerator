@@ -55,33 +55,33 @@ fun HomeScreenLayout(
         modifier = Modifier.fillMaxSize()
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_small))
         ) {
             Text(
                 text = stringResource(R.string.home_text_1)
             )
-        }
-        Row(
-            modifier = Modifier.fillMaxHeight(),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Column(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                //verticalArrangement = Arrangement.Center
+            Row(
+                modifier = Modifier.fillMaxHeight(),
+                //verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    text = stringResource(R.string.home_text_2)
-                )
-                Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
-                recipeQuantities.forEach { recipe ->
-                    SubmitButton(
-                        buttonNumberOfMeals = recipe.first,
-                        onClick = { onSubmitButtonClicked(recipe.second) })
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    //verticalArrangement = Arrangement.Center
+                ) {
+                    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_large)))
+                    Text(
+                        text = stringResource(R.string.home_text_2)
+                    )
+                    Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
+                    recipeQuantities.forEach { recipe ->
+                        SubmitButton(
+                            buttonNumberOfMeals = recipe.first,
+                            onClick = { onSubmitButtonClicked(recipe.second) })
+                    }
                 }
-
             }
         }
     }

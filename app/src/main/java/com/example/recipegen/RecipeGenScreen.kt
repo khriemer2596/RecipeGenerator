@@ -74,7 +74,6 @@ fun RecipeGenAppBar(
             }
         }
     )
-
 }
 
 @Composable

@@ -3,8 +3,10 @@
     <string name="recipe_screen">Generated Recipes</string>
     <string name="ingredient_screen">Ingredients List</string>
     <string name="back_button">Back</string>
-    <string name="home_text_1">What Are You Eating This Week?</string>
-    <string name="home_text_2">"Select Number of Meals:"</string>
+    <string name="home_text_1">Welcome to Recipe Gen! This app aims to help you meal prep dinners
+        for the upcoming week by generating random recipes for you to cook. Simply select the number
+        of meals you wish generate.</string>
+    <string name="home_text_2">"Select Number of Meals for the Upcoming Week:"</string>
     <string name="one_meal">One Meal</string>
     <string name="two_meals">Two Meals</string>
     <string name="three_meals">Three Meals</string>
