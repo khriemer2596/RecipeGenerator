@@ -150,7 +150,7 @@ fun RecipeGenApp(
                 IngredientScreen( // TODO: Implement Ingredient Screen; display with LazyColumn
                     ingredientList = uiState.ingredientList,
                     onEmailIngredientListButtonClicked = { emailIngredientList() },
-                    onStartNewButtonClicked = {
+                    onHomeButtonClicked = {
                         viewModel.setQuantity(it)
                         navController.navigate(RecipeGenScreen.Home.name)
                     },

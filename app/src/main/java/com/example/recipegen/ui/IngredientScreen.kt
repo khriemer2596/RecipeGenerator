@@ -11,8 +11,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -36,7 +38,7 @@ import com.example.recipegen.data.DataSource
 fun IngredientScreen(
     ingredientList: List<Int>,
     onEmailIngredientListButtonClicked: (Int) -> Unit,
-    onStartNewButtonClicked: (Int) -> Unit,
+    onHomeButtonClicked: (Int) -> Unit,
     onCancelButtonClicked: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -53,12 +55,92 @@ fun IngredientScreen(
                 text = "Here are the ingredients you need: "
             )
         }
-        //Spacer(modifier = Modifier.height(dimensionResource(R.dimen.padding_medium)))
+
         val ingredients = mutableMapOf<String, Int>()
+
+        /*
+        var riceAddition = 1
+        var garlicAddition = 1
+        var gingerAddition = 1
+        var soySauceAddition = 1
+        var riceWineVinegarAddition = 1
+        var cornStarchAddition = 1
+        var srirachaAddition = 1
+        var sweetThaiAddition = 1
+        var sesameOilAddition = 1
+        */
+
         for (ingredient in ingredientList) {
             for (i in 0..<DataSource.recipeIngredient[ingredient].size) {
                 if (ingredients.containsKey(DataSource.recipeIngredient[ingredient][i])) {
-                    ingredients[DataSource.recipeIngredient[ingredient][i]] = ingredients[DataSource.recipeIngredient[ingredient][i]]!! + 1
+                    /*
+                    if (DataSource.recipeIngredient[ingredient][i] == "rice") {
+                        riceAddition += 1
+                        if (riceAddition > 4) {
+                            ingredients[DataSource.recipeIngredient[ingredient][i]] = ingredients[DataSource.recipeIngredient[ingredient][i]]!! + 1
+                            riceAddition = 1
+                        }
+                    }
+                    else if (DataSource.recipeIngredient[ingredient][i] == "garlic") {
+                        garlicAddition += 1
+                        if (garlicAddition > 6) {
+                            ingredients[DataSource.recipeIngredient[ingredient][i]] = ingredients[DataSource.recipeIngredient[ingredient][i]]!! + 1
+                            garlicAddition = 1
+                        }
+                    }
+                    else if (DataSource.recipeIngredient[ingredient][i] == "ginger") {
+                        gingerAddition += 1
+                        if (gingerAddition > 7) {
+                            ingredients[DataSource.recipeIngredient[ingredient][i]] = ingredients[DataSource.recipeIngredient[ingredient][i]]!! + 1
+                            gingerAddition = 1
+                        }
+                    }
+                    else if (DataSource.recipeIngredient[ingredient][i] == "soy sauce") {
+                        soySauceAddition += 1
+                        if (soySauceAddition > 10) {
+                            ingredients[DataSource.recipeIngredient[ingredient][i]] = ingredients[DataSource.recipeIngredient[ingredient][i]]!! + 1
+                            soySauceAddition = 1
+                        }
+                    }
+                    else if (DataSource.recipeIngredient[ingredient][i] == "rice wine vinegar") {
+                        riceWineVinegarAddition += 1
+                        if (riceWineVinegarAddition > 10) {
+                            ingredients[DataSource.recipeIngredient[ingredient][i]] = ingredients[DataSource.recipeIngredient[ingredient][i]]!! + 1
+                            riceWineVinegarAddition = 1
+                        }
+                    }
+                    else if (DataSource.recipeIngredient[ingredient][i] == "cornstarch") {
+                        cornStarchAddition += 1
+                        if (cornStarchAddition > 10) {
+                            ingredients[DataSource.recipeIngredient[ingredient][i]] = ingredients[DataSource.recipeIngredient[ingredient][i]]!! + 1
+                            cornStarchAddition = 1
+                        }
+                    }
+                    else if (DataSource.recipeIngredient[ingredient][i] == "sriracha") {
+                        srirachaAddition += 1
+                        if (srirachaAddition > 10) {
+                            ingredients[DataSource.recipeIngredient[ingredient][i]] = ingredients[DataSource.recipeIngredient[ingredient][i]]!! + 1
+                            srirachaAddition = 1
+                        }
+                    }
+                    else if (DataSource.recipeIngredient[ingredient][i] == "sweet thai chili sauce") {
+                        sweetThaiAddition += 1
+                        if (sweetThaiAddition > 10) {
+                            ingredients[DataSource.recipeIngredient[ingredient][i]] = ingredients[DataSource.recipeIngredient[ingredient][i]]!! + 1
+                            sweetThaiAddition = 1
+                        }
+                    }
+                    else if (DataSource.recipeIngredient[ingredient][i] == "sesame oil") {
+                        sesameOilAddition += 1
+                        if (sesameOilAddition > 10) {
+                            ingredients[DataSource.recipeIngredient[ingredient][i]] = ingredients[DataSource.recipeIngredient[ingredient][i]]!! + 1
+                            sesameOilAddition = 1
+                        }
+                    }
+                    */
+                    //else {
+                        ingredients[DataSource.recipeIngredient[ingredient][i]] = ingredients[DataSource.recipeIngredient[ingredient][i]]!! + 1
+                    //}
                 }
                 else {
                     ingredients[DataSource.recipeIngredient[ingredient][i]] = 1
@@ -67,7 +149,6 @@ fun IngredientScreen(
         }
 
         LazyColumn(
-            //contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
             Modifier
                 .fillMaxSize()
                 .padding(16.dp)
@@ -88,19 +169,33 @@ fun IngredientScreen(
                 }
             }
         }
-        //TODO: Add other buttons
-        //val intent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"))
+        //TODO: Add other buttons?
         val context = LocalContext.current
-
 
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(
-                onClick = { context.sendMail(to = "example@gmail.com", subject = "Example Subject") }
+            Row (
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Text("Email Ingredients List")
+                Button(
+                    onClick = {
+                        context.sendMail(
+                            to = "",
+                            subject = "Ingredients List",
+                            body = ingredients.toString()
+                        )
+                    }
+                ) {
+                    Text("Email this List")
+                }
+                Button(
+                    onClick = { onHomeButtonClicked(1) }
+                ) {
+                    Text("Back to Home")
+                }
             }
         }
     }
@@ -120,13 +215,14 @@ fun RowScope.TableCell(
     )
 }
 
-fun Context.sendMail(to: String, subject: String) {
-    // TODO: Email with body already containing ingredients list?
+fun Context.sendMail(to: String, subject: String, body: String) {
+    // TODO: Email with body already containing ingredients list in better format?
     try {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "vnd.android.cursor.item/email" // or "message/rfc822"
         intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(to))
         intent.putExtra(Intent.EXTRA_SUBJECT, subject)
+        intent.putExtra(Intent.EXTRA_TEXT, body)
         startActivity(intent)
     } catch (e: ActivityNotFoundException) {
         // TODO: Handle case where no email app is available

@@ -15,7 +15,7 @@ object DataSource {
     )
 
     // TODO: Add actual recipes
-    // Asian Rice Bowls: indexes 3-16
+    // Asian Rice Bowls: indexes 3-15
     val recipeNames = listOf(
         "Tacos",
         "Salmon Bowls",
@@ -26,7 +26,6 @@ object DataSource {
         "Sweet Ginger Chicken Stir-Fry Bowls",
         "Saucy Chicken and Pepper Stir-Fry",
         "Ginger and Ponzu Turkey Bowls",
-        "Sweet Ginger Chicken Stir-Fry Bowls",
         "Hibachi Style Steak and Rice Bowls",
         "Hibachi Style Chicken Stir-Fry",
         "Sweet Soy Ramen Stir Fry",
@@ -52,11 +51,9 @@ object DataSource {
         listOf("rice", "garlic", "red bell pepper", "umami ginger sauce",
             "scallions", "chicken breast"),
         listOf("rice", "garlic", "long green pepper", "soy sauce",
-            "ponzu", "chicken breast", "sweet thai chili sauce", "corn starch", "ginger"),
+            "ponzu", "chicken breast", "sweet thai chili sauce", "cornstarch", "ginger"),
         listOf("rice", "garlic", "lime", "zucchini", "sweet soy glaze",
             "carrots", "ground turkey", "ginger", "sriracha", "ponzu"),
-        listOf("rice", "garlic", "red bell pepper", "umami ginger sauce",
-            "scallions", "chicken breast"),
         listOf("rice", "zucchini", "yellow onion", "mayo",
             "scallions", "steak", "ponzu", "fry seasoning", "sriracha", "sesame seeds"),
         listOf("rice", "garlic", "long green pepper", "yellow onion",
