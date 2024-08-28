@@ -1,6 +1,5 @@
 package com.example.recipegen.data
 
-import androidx.compose.ui.res.stringResource
 import com.example.recipegen.R
 
 object DataSource {
